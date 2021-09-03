@@ -5,9 +5,71 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+   
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.form-control{
+  border: 1px solid rgb(133, 140, 235);
+} 
+
+
+.navbar{
+  background: rgb(79, 214, 232);
+}
+
+
+
+.nav-link{
+  color: aliceblue;
+}
+
+.nav-link:hover{
+  color: rgb(14, 212, 30);
+
+}
+
+
+.fonts-loaded body, .fonts-loaded button, .fonts-loaded input, .fonts-loaded select, .fonts-loaded textarea {
+  font-family: Roboto,Arial,sans-serif;
+  letter-spacing: 0;
+}
+
+.box > input{
+
+	flex: 1;
+
+	height: 30px;
+
+	border: none;
+
+	outline: none;
+
+	font-size: 18px;
+
+	padding-left: 10px;
+
+
+}
+
+.box > i {
+
+	font-size: 20px;
+
+	color: #777;
+
+}
+
+.box {
+  width: 455px;
+  height: 7px;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
 }
