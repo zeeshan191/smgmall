@@ -154,10 +154,12 @@ export default function PrimarySearchAppBar() {
     >
     
     <MenuItem>
-    <Button variant="outlined" color="primary" href="#outlined-buttons">
+    <Button variant="outlined" color="primary" href="/login">
     Login
 </Button>
-  
+<Button variant="outlined" color="primary" href="/Registor">
+Registor
+</Button>
   </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
