@@ -24,14 +24,26 @@ code {
 
 
 .nav-link{
-  color: aliceblue;
+  color: rgb(246, 247, 248);
+  font-family: cursive;
+  font-weight: bolder;
 }
 
 .nav-link:hover{
-  color: rgb(14, 212, 30);
+  color: rgb(122, 66, 129);
 
 }
-
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
 
 .fonts-loaded body, .fonts-loaded button, .fonts-loaded input, .fonts-loaded select, .fonts-loaded textarea {
   font-family: Roboto,Arial,sans-serif;

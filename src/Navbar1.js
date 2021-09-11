@@ -1,6 +1,9 @@
+/*eslint-disable*/
+
 import React from 'react';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import { useHistory,NavLink } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -86,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const History = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -93,8 +98,16 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const ContactHandler = () => {
+    setAnchorEl(null);
+    History.push('/Contact');
+
+  }
+
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+    History.push('/Login');
   };
 
   const handleMobileMenuClose = () => {
@@ -121,9 +134,10 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>tousif</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Order</MenuItem>
+      <MenuItem onClick={handleMenuClose} 
+     ><NavLink to="/Login">Sign Up</NavLink></MenuItem>
     </Menu>
   );
 
@@ -138,18 +152,13 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-    <MenuItem onClick={handleProfileMenuOpen}>
-    <IconButton
-      aria-label="account of current user"
-      aria-controls="primary-search-account-menu"
-      aria-haspopup="true"
-      color="inherit"
-    >
-     
-    </IconButton>
-    <p>Login</p>
+    
+    <MenuItem>
+    <Button variant="outlined" color="primary" href="#outlined-buttons">
+    Login
+</Button>
+  
   </MenuItem>
-   
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -196,18 +205,18 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop} >
            
-             
-          <IconButton
-          edge="end"
-          aria-label="account of current user"
-          aria-controls={menuId}
-          aria-haspopup="true"
-          onClick={handleProfileMenuOpen}
-          color="inherit"
-          style={{marginRight:"30px",borderRadius:'10%'}}
-        >
-        Login
+          <IconButton aria-label="show 4 new mails" color="inherit"   style={{marginRight:"30px",borderRadius:'10%'}}>
+          <Button variant="outlined" color="primary" href="/Login">
+          Login
+      </Button>
+         
         </IconButton>
+        <IconButton aria-label="show 4 new mails" color="inherit"   style={{marginRight:"30px",borderRadius:'10%'}}>
+        <Button variant="outlined" color="primary" href="/Registor">
+     Registor
+    </Button>
+       
+      </IconButton>
             <IconButton
               edge="end"
               aria-label="account of current user"
