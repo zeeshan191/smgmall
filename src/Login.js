@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 import './Login.scss';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
-import { login } from './store/reducers/useSlice';
-import { ContactSupportOutlined } from '@material-ui/icons';
+
+
+
 import * as firebase from "firebase";
 import swal from 'sweetalert';
 import './config/firestore';
@@ -15,7 +15,7 @@ import './config/firestore';
 
 function Login(props) {
  
-  const dispatch = useDispatch()
+  
   const history = useHistory();
   const [logInvalue, setLoginvalue] = useState({
     logInInput: "",

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import * as firebase from "firebase/app";
 
-import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+
+
 import swal from 'sweetalert';
 import { useHistory } from "react-router-dom";
 import './config/firestore';
