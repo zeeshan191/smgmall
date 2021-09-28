@@ -1,6 +1,9 @@
+/*eslint-disable*/
+
 import React from 'react';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import { useHistory,NavLink } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -8,11 +11,13 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import ShoppingCartOutlined from '@material-ui/icons/ShoppingCartOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: '222px',
   },
   title: {
     display: 'none',
@@ -32,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
+   
     '&:hover': {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
@@ -51,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  
   },
   inputRoot: {
     color: 'inherit',
@@ -60,15 +67,18 @@ const useStyles = makeStyles((theme) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
-    width: '100%',
+    width:'100%',
+ 
     [theme.breakpoints.up('md')]: {
-      width: '20ch',
+      width: '47ch',
     },
   },
   sectionDesktop: {
     display: 'none',
+    
     [theme.breakpoints.up('md')]: {
-      display: 'flex',
+    display: 'flex',
+
     },
   },
   sectionMobile: {
@@ -79,7 +89,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({props}) {
+  const History = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -87,8 +98,16 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const ContactHandler = () => {
+    setAnchorEl(null);
+    History.push('/Contact');
+
+  }
+
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+    History.push('/Login');
   };
 
   const handleMobileMenuClose = () => {
@@ -115,8 +134,10 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Order</MenuItem>
+      <MenuItem onClick={handleMenuClose} 
+     ><NavLink to="/Login">Sign Up</NavLink></MenuItem>
     </Menu>
   );
 
@@ -131,22 +152,15 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+    
+    <MenuItem>
+    <Button variant="outlined" color="primary" href="/login">
+    Login
+</Button>
+<Button variant="outlined" color="primary" href="/Registor">
+Registor
+</Button>
+  </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -158,25 +172,26 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-    </Menu>
+   
+
+    <MenuItem>
+    <IconButton aria-label="show 11 new notifications" color="inherit">
+      <Badge badgeContent={11} color="secondary">
+        <ShoppingCartOutlined />
+      </Badge>
+    </IconButton>
+    <p>Cart</p>
+  </MenuItem>
+  </Menu>
+
   );
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
-          </Typography>
-          <div className={classes.search}>
+    <div className={classes.grow} style={{background:'rgb(79, 214, 232)'}}>
+      <AppBar position="static" >
+        <Toolbar  style={{background:"rgb(79, 214, 232)"}}>
+         <img src='logo.png' width='130' height='45'/ >
+                 <div className={classes.search} >
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -190,17 +205,20 @@ export default function PrimarySearchAppBar() {
             />
           </div>
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+          <div className={classes.sectionDesktop} >
+           
+          <IconButton aria-label="show 4 new mails" color="inherit"   style={{marginRight:"30px",borderRadius:'10%'}}>
+          <Button variant="outlined" color="primary" href="/Login">
+          Login
+      </Button>
+         
+        </IconButton>
+        <IconButton aria-label="show 4 new mails" color="inherit"   style={{marginRight:"30px",borderRadius:'10%'}}>
+        <Button variant="outlined" color="primary" href="/Registor">
+     Registor
+    </Button>
+       
+      </IconButton>
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -208,9 +226,15 @@ export default function PrimarySearchAppBar() {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
+              style={{marginRight:"30px",borderRadius:'10%'}}
             >
               <AccountCircle />
             </IconButton>
+            <IconButton aria-label="show 4 new mails" color="inherit"   style={{marginRight:"30px",borderRadius:'10%'}}>
+            <Badge badgeContent={4} color="secondary">
+              <ShoppingCartOutlined />
+            </Badge>
+          </IconButton>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

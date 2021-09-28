@@ -355,10 +355,10 @@ body {
         left: 50%;
         display: block;
         background: $accent;
-        width: 30px;
+        width: 82px;
         height: 30px;
-        border-radius: 100%;
-        margin: -15px 0 0 -15px;
+        border-radius: 11%;
+        margin: -15px 0 0 -42px;
         opacity: 0;
         transition: .3s ease;
       }
@@ -380,7 +380,7 @@ body {
         }
 
         &:before {
-          opacity: 1;
+          opacity: 3;
           
         }
       }

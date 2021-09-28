@@ -1,40 +1,106 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from "react-router-dom";
 import './Login.scss';
-function Login() {
-   
+import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+import { login } from './store/reducers/useSlice';
+import { ContactSupportOutlined } from '@material-ui/icons';
+import * as firebase from "firebase";
+import swal from 'sweetalert';
+import './config/firestore';
 
-  
-      
-    return (
-       
-        <>
+
+
+function Login(props) {
+ 
+  const dispatch = useDispatch()
+  const history = useHistory();
+  const [logInvalue, setLoginvalue] = useState({
+    logInInput: "",
+    logInPassword: "",
+  });
+  const changeLogInhandler = (e) => {
+    setLoginvalue({
+      ...logInvalue,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const authListener = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      alert('login')
+      if (user) {
+        swal({
+          text: "You have successfully loged in",
+          icon: "success",
+        });
         
-        <div className="container">
+        history.push("/");
+      }
+    });
+  };
+
+  const logininput = () => {
+   alert('nai')
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(
+        logInvalue.logInInput,
+        logInvalue.logInPassword
+      )
+      .then(() => {
+        authListener();
+      })
+      .catch((error) => {
+        swal("Something went wrong!", error.message, "error");
+      });
+  };
+
+
+  return (
+
+    <>
+
+      <div className="container">
         <div className="card"></div>
         <div className="card">
           <h1 className="title">Login</h1>
-          <form>
+        
             <div className="input-container">
-              <input type="#{type}" id="#{label}" required="required"/>
-              <label for="#{label}">Username</label>
+              <input type="#{type}"   required="required" 
+              onChange={(e) => {
+                changeLogInhandler(e);
+              }}
+              name="logInInput"
+              
+              value={logInvalue.logInInput}
+              />
+              <label for="#{label}">UserEmail</label>
               <div className="bar"></div>
             </div>
             <div className="input-container">
-              <input type="#{type}" id="#{label}" required="required"/>
+              <input type="#{type}"  onChange={(e) => {
+                changeLogInhandler(e);
+              }}
+              name="logInPassword"
+            
+              value={logInvalue.logInPassword} required="required" />
               <label for="#{label}">Password</label>
               <div className="bar"></div>
             </div>
             <div className="button-container">
-              <button><span>Login</span></button>
+              <button onClick={logininput}  ><span>Login</span></button>
             </div>
-            <div className="footer"><a href="/">Forgot your password?</a></div>
-          </form>
+            <div className="footer"><a href="/Forgetpassword">Forgot your password?</a></div>
+    
         </div>
-     
+   
       </div>
-     
-        </>
-    )
+
+    </>
+  )
 }
 
 export default Login
